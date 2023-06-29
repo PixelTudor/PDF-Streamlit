@@ -1,6 +1,5 @@
-__version__ = "0.4.8.3"
-app_name = "Ask my PDF"
-
+__version__ = "0.0.1"
+app_name = "Decode-Rx"
 
 # BOILERPLATE
 
@@ -12,7 +11,7 @@ import css
 st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
 header1 = st.empty() # for errors / messages
 header2 = st.empty() # for errors / messages
-header3 = st.empty() # for errors / messages
+
 
 # IMPORTS
 
@@ -24,6 +23,19 @@ import cache
 import os
 
 from time import time as now
+
+
+def ui_title():
+	st.markdown(f"""
+	# Decode-Rx 'Ask-my-pdf'
+	""")
+	st.markdown(f"""
+	#### 🚧 Work in Progress 🚧
+	""")
+	st.markdown(f"""
+	*Notice: As of 6/28/23, this program is not compliant with HIPAA guidelines. It should not be used to process or store sensitive health information. Please only upload documents that have been thoroughly de-identified. This means all Personally Identifiable Information (PII) and Protected Health Information (PHI) should be removed from the documents before they are uploaded. This includes, but is not limited to, names, addresses, Social Security numbers, and any health-related information.*
+	""")
+	ui_spacer(1)
 
 # HANDLERS
 
@@ -49,8 +61,7 @@ if 'user' not in ss and ss['community_user']:
 
 # COMPONENTS
 
-
-def ui_spacer(n=2, line=False, next_n=0):
+def ui_spacer(n=0, line=False, next_n=0):
 	for _ in range(n):
 		st.write('')
 	if line:
@@ -58,25 +69,13 @@ def ui_spacer(n=2, line=False, next_n=0):
 	for _ in range(next_n):
 		st.write('')
 
+
 def ui_info():
 	st.markdown(f"""
-	# Ask my PDF
 	version {__version__}
-	
-	Question answering system built on top of GPT3.
 	""")
-	ui_spacer(1)
-	st.write("Made by [Maciej Obarski](https://www.linkedin.com/in/mobarski/).", unsafe_allow_html=True)
-	ui_spacer(1)
-	st.markdown("""
-		Thank you for your interest in my application.
-		Please be aware that this is only a Proof of Concept system
-		and may contain bugs or unfinished features.
-		If you like this app you can ❤️ [follow me](https://twitter.com/KerbalFPV)
-		on Twitter for news and updates.
-		""")
-	ui_spacer(1)
-	st.markdown('Source code can be found [here](https://github.com/mobarski/ask-my-pdf).')
+
+
 
 def ui_api_key():
 	if ss['community_user']:
@@ -305,7 +304,11 @@ def output_add(q,a):
 
 with st.sidebar:
 	ui_info()
-	ui_spacer(2)
+	ui_spacer(1)
+	ui_api_key()
+	ui_pdf_file()
+
+
 	with st.expander('advanced'):
 		ui_show_debug()
 		b_clear()
@@ -320,8 +323,7 @@ with st.sidebar:
 		ui_task()
 		ui_hyde_prompt()
 
-ui_api_key()
-ui_pdf_file()
+ui_title()
 ui_question()
 ui_hyde_answer()
 b_ask()
