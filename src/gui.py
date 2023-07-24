@@ -24,19 +24,6 @@ import os
 
 from time import time as now
 
-
-def ui_title():
-	st.markdown(f"""
-	# Decode-Rx 'Ask-my-pdf'
-	""")
-	st.markdown(f"""
-	#### 🚧 Work in Progress 🚧
-	""")
-	st.markdown(f"""
-	*Notice: As of 6/28/23, this program is not compliant with HIPAA guidelines. It should not be used to process or store sensitive health information. Please only upload documents that have been thoroughly de-identified. This means all Personally Identifiable Information (PII) and Protected Health Information (PHI) should be removed from the documents before they are uploaded. This includes, but is not limited to, names, addresses, Social Security numbers, and any health-related information.*
-	""")
-	ui_spacer(1)
-
 # HANDLERS
 
 def on_api_key_change():
